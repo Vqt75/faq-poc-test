@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Assistant FAQ Projet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f6f6f4;
+      --surface: #ffffff;
+      --text: #111111;
+      --muted: #666666;
+      --line: #d9d6cf;
+      --gold: #9b7a2f;
+      --gold-soft: #f4ecda;
+      --black: #111111;
+      --max: 1120px;
+      --radius: 18px;
+      --shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Roboto", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(246, 246, 244, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topbar__inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand__mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: var(--black);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+      flex-shrink: 0;
+    }
+
+    .brand__text {
+      min-width: 0;
+    }
+
+    .brand__eyebrow {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+
+    .brand__title {
+      font-size: 0.95rem;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .status-pill {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 0.83rem;
+      white-space: nowrap;
+    }
+
+    .wrap {
+      max-width: var(--max);
+      width: 100%;
+      margin: 0 auto;
+      padding: 28px 20px 40px;
+      flex: 1;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero__main {
+      padding: 28px;
+    }
+
+    .hero__aside {
+      padding: 24px;
+    }
+
+    .hero-project {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .logo-box {
+      width: 120px;
+      height: 120px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #faf9f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .logo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .eyebrow {
+      font-size: 0.74rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+      font-weight: 500;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2rem, 4.4vw, 3.5rem);
+      line-height: 0.98;
+      font-weight: 400;
+      letter-spacing: -0.04em;
+    }
+
+    .hero__intro {
+      max-width: 760px;
+      color: #2d2d2d;
+      font-size: 1.04rem;
+    }
+
+    .hero__intro p {
+      margin: 0;
+    }
+
+    .aside-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .aside-item strong {
+      display: block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 4px;
+      font-weight: 700;
+    }
+
+    .assistant-shell {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .sidebar {
+      padding: 18px;
+      position: sticky;
+      top: 78px;
+    }
+
+    .sidebar__title,
+    .chat__title,
+    .form-block__title {
+      margin: 0 0 16px;
+      font-size: 0.96rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .search-box {
+      margin-bottom: 16px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 13px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: #fff;
+      font-size: 0.98rem;
+      font-family: inherit;
+      color: var(--text);
+      outline: none;
+    }
+
+    .search-box input:focus,
+    .form-field input:focus,
+    .form-field textarea:focus,
+    .composer input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(155, 122, 47, 0.08);
+      outline: none;
+    }
+
+    .filter-group {
+      margin-bottom: 16px;
+    }
+
+    .filter-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .filter-btn {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--text);
+      border-radius: 999px;
+      padding: 8px 11px;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: 0.15s ease;
+      font-family: inherit;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .filter-btn.active {
+      background: var(--black);
+      color: #fff;
+      border-color: var(--black);
+    }
+
+    .quick-actions {
+      display: grid;
+      gap: 8px;
+    }
+
+    .quick-btn {
+      width: 100%;
+      text-align: left;
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 12px;
+      padding: 12px 13px;
+      font-size: 0.92rem;
+      color: var(--text);
+      cursor: pointer;
+      transition: 0.15s ease;
+      font-family: inherit;
+    }
+
+    .quick-btn:hover {
+      border-color: var(--gold);
+      background: var(--gold-soft);
+    }
+
+    .chat {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .chat__header {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(to bottom, #fff, #fcfcfb);
+    }
+
+    .chat__header p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .chat__window {
+      padding: 20px;
+      background:
+        radial-gradient(circle at top right, rgba(155, 122, 47, 0.06), transparent 26%),
+        #fcfcfb;
+      min-height: 500px;
+    }
+
+    .chat-flow {
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .msg {
+      max-width: 88%;
+      border-radius: 16px;
+      padding: 14px 15px;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .msg--assistant {
+      justify-self: start;
+      background: #fff;
+    }
+
+    .msg--user {
+      justify-self: end;
+      background: var(--black);
+      color: #fff;
+      border-color: var(--black);
+    }
+
+    .msg__label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .msg--user .msg__label {
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .msg__text {
+      white-space: pre-line;
+      font-size: 0.96rem;
+    }
+
+    .msg__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 0.78rem;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      background: #fff;
+    }
+
+    .tag--gold {
+      background: var(--gold-soft);
+      color: var(--gold);
+      border-color: #e4d1a1;
+    }
+
+    .tag--black {
+      background: #f2f2f2;
+      color: #444;
+    }
+
+    .answer-note {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .faq-results {
+      margin-top: 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .faq-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .faq-card button {
+      all: unset;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      width: 100%;
+      cursor: pointer;
+      padding: 16px 18px;
+      box-sizing: border-box;
+    }
+
+    .faq-card button:hover {
+      background: #faf9f6;
+    }
+
+    .faq-card__question {
+      font-size: 0.98rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .faq-card__icon {
+      color: var(--gold);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .faq-card__answer {
+      display: none;
+      padding: 0 18px 18px;
+      color: #2c2c2c;
+      font-size: 0.95rem;
+      white-space: pre-line;
+    }
+
+    .faq-card.open .faq-card__answer {
+      display: block;
+    }
+
+    .empty {
+      display: none;
+      margin-top: 18px;
+      border: 1px dashed var(--line);
+      border-radius: 16px;
+      background: #fff;
+      padding: 18px;
+      color: var(--muted);
+    }
+
+    .composer {
+      margin-top: 18px;
+      padding: 16px 18px;
+      border-top: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .composer__label {
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .composer__row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+    }
+
+    .composer input {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      font-size: 0.96rem;
+      font-family: inherit;
+      outline: none;
+    }
+
+    .composer button,
+    .submit-btn {
+      background: var(--black);
+      color: #fff;
+      border: 0;
+      padding: 13px 18px;
+      border-radius: 12px;
+      font-size: 0.94rem;
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    .followup {
+      margin-top: 20px;
+      padding: 20px;
+      border-top: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .followup__intro {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .form-field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .form-field--full {
+      grid-column: 1 / -1;
+    }
+
+    .form-field label {
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .form-field input,
+    .form-field textarea {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      background: #fff;
+      color: var(--text);
+    }
+
+    .form-field textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .footer-note {
+      max-width: var(--max);
+      margin: 18px auto 0;
+      padding: 0 20px 30px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    @media (max-width: 920px) {
+      .hero,
+      .assistant-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+      }
+
+      .chat__window {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .hero-project {
+        grid-template-columns: 1fr;
+      }
+
+      .logo-box {
+        width: 100px;
+        height: 100px;
+      }
+
+      .topbar__inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .status-pill {
+        white-space: normal;
+      }
+
+      .hero__main,
+      .hero__aside,
+      .sidebar,
+      .chat__header,
+      .chat__window,
+      .composer,
+      .followup {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .msg {
+        max-width: 100%;
+      }
+
+      .composer__row,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="topbar__inner">
+        <div class="brand">
+          <div class="brand__mark">AI</div>
+          <div class="brand__text">
+            <div class="brand__eyebrow">Projet pilote</div>
+            <div class="brand__title">Assistant FAQ Projet — Démonstrateur</div>
+          </div>
+        </div>
+        <div class="status-pill">POC statique hébergeable sur GitHub Pages</div>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <section class="hero">
+        <div class="panel hero__main">
+          <div class="hero-project">
+            <div class="logo-box">
+              <img src="logo.jpeg" alt="Logo du projet XYZ">
+            </div>
+
+            <div>
+              <div class="eyebrow">Projet XYZ — espace d’information</div>
+              <h1>Retrouvez toutes les informations à jour sur le projet XYZ</h1>
+              <div class="hero__intro">
+                <p>
+                  Cet espace vous permet de consulter facilement les réponses aux principales questions liées au projet :
+                  calendrier, étapes du déménagement, services, accompagnement et informations pratiques.
+                  Les contenus sont mis à jour au fil de l’avancement du projet, afin de vous donner une information plus claire,
+                  plus accessible et plus réactive.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel hero__aside">
+          <h2 class="chat__title">Ce que ce POC permet de montrer</h2>
+          <div class="aside-list">
+            <div class="aside-item">
+              <strong>Format</strong>
+              Une interface plus engageante qu’un mail ou qu’un document Word.
+            </div>
+            <div class="aside-item">
+              <strong>Logique</strong>
+              Une base de réponses projet simple à maintenir.
+            </div>
+            <div class="aside-item">
+              <strong>Usages</strong>
+              Recherche, questions fréquentes, réponses provisoires, contenus enrichissables.
+            </div>
+            <div class="aside-item">
+              <strong>Étape suivante</strong>
+              Possibilité d’ajouter ensuite une couche IA si le format est jugé pertinent.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="assistant-shell">
+        <aside class="panel sidebar">
+          <h2 class="sidebar__title">Paramètres de consultation</h2>
+
+          <div class="search-box">
+            <input type="search" id="searchInput" placeholder="Rechercher : restauration, date, parking, étapes…">
+          </div>
+
+          <div class="filter-group">
+            <div class="filter-label">Filtrer par thème</div>
+            <div class="filters">
+              <button class="filter-btn active" data-filter="all" type="button">Toutes</button>
+              <button class="filter-btn" data-filter="logistique" type="button">Logistique</button>
+              <button class="filter-btn" data-filter="services" type="button">Services</button>
+              <button class="filter-btn" data-filter="accompagnement" type="button">Accompagnement</button>
+              <button class="filter-btn" data-filter="site" type="button">Nouveau site</button>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <div class="filter-label">Questions rapides</div>
+            <div class="quick-actions">
+              <button class="quick-btn" type="button" data-question="Quelle est la date du déménagement ?">Quelle est la date du déménagement ?</button>
+              <button class="quick-btn" type="button" data-question="Quelle sera l’offre de restauration sur le nouveau site ?">Quelle sera l’offre de restauration sur le nouveau site ?</button>
+              <button class="quick-btn" type="button" data-question="Quelles sont les grandes étapes d’un déménagement ?">Quelles sont les grandes étapes d’un déménagement ?</button>
+              <button class="quick-btn" type="button" data-question="Y aura-t-il des visites du nouveau site avant l’arrivée ?">Y aura-t-il des visites du nouveau site avant l’arrivée ?</button>
+            </div>
+          </div>
+        </aside>
+
+        <section class="panel chat">
+          <div class="chat__header">
+            <div>
+              <h2 class="chat__title" style="margin-bottom: 4px;">Assistant projet</h2>
+              <p>Version simple simulant une expérience conversationnelle à partir d’une base FAQ.</p>
+            </div>
+            <div class="tag tag--gold" id="resultsCount">10 réponses disponibles</div>
+          </div>
+
+          <div class="chat__window">
+            <div class="chat-flow">
+              <div class="msg msg--assistant">
+                <div class="msg__label">Assistant</div>
+                <div class="msg__text">Bonjour, je peux vous aider à retrouver une information sur le projet.
+
+Vous pouvez :
+- rechercher un sujet dans la barre latérale,
+- cliquer sur une question rapide,
+- ou saisir votre propre question en bas de l’écran.
+
+Certaines réponses sont confirmées, d’autres encore en attente : c’est précisément ce que ce format permet de gérer plus souplement.</div>
+                <div class="msg__meta">
+                  <span class="tag tag--gold">POC FAQ conversationnelle</span>
+                  <span class="tag tag--black">Sans backend</span>
+                </div>
+              </div>
+
+              <div class="faq-results" id="faqList"></div>
+
+              <div class="empty" id="emptyState">
+                <strong>Aucune réponse exacte trouvée pour le moment.</strong>
+                <p style="margin: 8px 0 0;">
+                  Cette question n’est peut-être pas encore documentée dans la base projet.
+                  Elle peut néanmoins être enregistrée comme sujet à clarifier dans une prochaine mise à jour.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="composer">
+            <div class="composer__label">Poser une question</div>
+            <div class="composer__row">
+              <input type="text" id="composerInput" placeholder="Ex. : Y aura-t-il une offre de restauration ?">
+              <button type="button" id="askBtn">Envoyer</button>
+            </div>
+          </div>
+
+          <div class="followup">
+            <h3 class="form-block__title">Si vous n’avez pas trouvé votre réponse</h3>
+            <p class="followup__intro">
+              Vous pouvez laisser votre question ici. Elle pourra être prise en compte dans une prochaine mise à jour de la FAQ ou traitée par l’équipe projet.
+            </p>
+
+            <form id="contactForm" action="" method="POST">
+              <div class="form-grid">
+                <div class="form-field">
+                  <label for="name">Nom et prénom</label>
+                  <input type="text" id="name" name="name" placeholder="Votre nom">
+                </div>
+
+                <div class="form-field">
+                  <label for="email">Adresse email</label>
+                  <input type="email" id="email" name="email" placeholder="votre@email.fr">
+                </div>
+
+                <div class="form-field form-field--full">
+                  <label for="question">Votre question</label>
+                  <textarea id="question" name="question" placeholder="Décrivez ici votre question ou le point qui reste flou."></textarea>
+                </div>
+
+                <div class="form-field form-field--full">
+                  <button type="submit" class="submit-btn">Envoyer la demande</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <div class="footer-note">
+      Démonstrateur HTML / CSS / JavaScript. Le formulaire de contact n’est pas encore branché : il peut ensuite être relié à une boîte mail via Formspree ou un autre service.
+    </div>
+  </div>
+
+  <script>
+    const faqData = [
+      {
+        category: "logistique",
+        status: "confirmée",
+        question: "Quelle est la date du déménagement ?",
+        answer: "Le déménagement est actuellement prévu la semaine du 14 octobre.\n\nLa date précise de bascule par équipe sera confirmée dès que le planning logistique sera totalement sécurisé.",
+        note: "Une communication plus détaillée sera partagée dès validation définitive du phasage."
+      },
+      {
+        category: "logistique",
+        status: "partielle",
+        question: "Quelles sont les grandes étapes d’un déménagement ?",
+        answer: "Le déménagement se prépare généralement en plusieurs temps :\n\n1. Information et cadrage du projet\n2. Préparation logistique et consignes pratiques\n3. Tri, archivage et préparation des postes\n4. Déménagement physique des équipes\n5. Installation et prise en main du nouveau site\n6. Ajustements post-arrivée\n\nLe niveau de détail de chaque étape dépendra du calendrier final du projet.",
+        note: "Le déroulé précis sera partagé à mesure que les jalons seront confirmés."
+      },
+      {
+        category: "services",
+        status: "en attente",
+        question: "Quelle sera l’offre de restauration sur le nouveau site ?",
+        answer: "Les modalités exactes de restauration ne sont pas encore arrêtées à ce stade.\n\nPlusieurs options sont actuellement à l’étude afin de proposer une solution adaptée aux usages du site et aux temps de pause des collaborateurs.",
+        note: "Nous reviendrons vers vous très prochainement avec des éléments plus précis sur ce point."
+      },
+      {
+        category: "site",
+        status: "confirmée",
+        question: "Y aura-t-il des espaces de convivialité sur le nouveau site ?",
+        answer: "Oui. Le nouveau site intégrera plusieurs espaces pensés pour les temps informels, les pauses et les échanges du quotidien.\n\nLeur configuration exacte pourra être présentée plus en détail dans les prochaines communications projet.",
+        note: "Des visuels ou plans simplifiés pourront être partagés dans un second temps."
+      },
+      {
+        category: "logistique",
+        status: "en attente",
+        question: "Comment seront gérés les cartons et l’étiquetage ?",
+        answer: "Le dispositif exact de distribution des cartons et d’étiquetage est en cours de préparation.\n\nL’objectif est de proposer un dispositif simple, lisible et commun à l’ensemble des équipes concernées.",
+        note: "Une consigne dédiée sera diffusée avant la phase de préparation concrète du déménagement."
+      },
+      {
+        category: "site",
+        status: "partielle",
+        question: "Y aura-t-il un parking vélo ou voiture ?",
+        answer: "Des solutions de stationnement sont prévues, mais leur périmètre exact et leurs modalités d’accès restent encore à préciser.\n\nCela concerne notamment la capacité, les conditions d’accès et les éventuelles priorités d’usage.",
+        note: "Une information détaillée sera communiquée dès que les règles d’accès seront stabilisées."
+      },
+      {
+        category: "accompagnement",
+        status: "confirmée",
+        question: "Y aura-t-il des visites du nouveau site avant l’arrivée ?",
+        answer: "Oui, le projet prévoit des temps de découverte du nouveau site avant l’installation définitive.\n\nLe format exact pourra varier : visites physiques, supports de présentation, ou contenus visuels partagés en amont.",
+        note: "Le calendrier de ces temps sera communiqué dans une prochaine étape."
+      },
+      {
+        category: "accompagnement",
+        status: "en attente",
+        question: "Que se passe-t-il si j’ai une situation individuelle particulière ?",
+        answer: "Les situations individuelles nécessitant une attention particulière seront prises en compte dans le cadre du projet.\n\nSi vous estimez avoir un besoin spécifique, vous pourrez vous signaler via les relais habituels une fois le dispositif de remontée formalisé.",
+        note: "Les modalités de remontée et de traitement de ces situations seront précisées ultérieurement."
+      },
+      {
+        category: "services",
+        status: "confirmée",
+        question: "Les services habituels seront-ils maintenus après le déménagement ?",
+        answer: "L’objectif du projet est d’assurer une continuité de service aussi fluide que possible.\n\nCertains ajustements peuvent néanmoins intervenir pendant la phase de transition, en fonction du calendrier de mise en service du nouveau site.",
+        note: "Une information spécifique sera partagée si des impacts temporaires sont identifiés."
+      },
+      {
+        category: "logistique",
+        status: "partielle",
+        question: "Que faut-il faire avant de quitter son poste actuel ?",
+        answer: "Avant le déménagement, il est généralement demandé de trier ses effets personnels, d’identifier ce qui doit suivre, de traiter les documents non utiles et de préparer son poste selon les consignes projet.\n\nLe niveau d’attendu exact sera communiqué dans un kit ou une note pratique dédiée.",
+        note: "Une checklist synthétique pourra être diffusée au moment opportun."
+      }
+    ];
+
+    const faqList = document.getElementById("faqList");
+    const searchInput = document.getElementById("searchInput");
+    const composerInput = document.getElementById("composerInput");
+    const askBtn = document.getElementById("askBtn");
+    const resultsCount = document.getElementById("resultsCount");
+    const emptyState = document.getElementById("emptyState");
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const quickButtons = document.querySelectorAll(".quick-btn");
+
+    let activeFilter = "all";
+
+    function statusClass(status) {
+      if (status === "confirmée") return "tag--gold";
+      if (status === "en attente") return "";
+      return "tag--black";
+    }
+
+    function categoryLabel(category) {
+      const labels = {
+        logistique: "Logistique",
+        services: "Services",
+        accompagnement: "Accompagnement",
+        site: "Nouveau site"
+      };
+      return labels[category] || category;
+    }
+
+    function renderFaq(items, injectedQuestion = null) {
+      faqList.innerHTML = "";
+
+      if (injectedQuestion) {
+        const userBlock = document.createElement("div");
+        userBlock.className = "msg msg--user";
+        userBlock.innerHTML = `
+          <div class="msg__label">Vous</div>
+          <div class="msg__text">${injectedQuestion}</div>
+        `;
+        faqList.appendChild(userBlock);
+      }
+
+      if (items.length === 0) {
+        emptyState.style.display = "block";
+        emptyState.innerHTML = `
+          <strong>Aucune réponse exacte trouvée pour le moment.</strong>
+          <p style="margin: 8px 0 0;">
+            Cette question n’est peut-être pas encore documentée dans la base projet.
+            Elle peut néanmoins être enregistrée comme sujet à clarifier dans une prochaine mise à jour.
+          </p>
+        `;
+        resultsCount.textContent = "0 réponse";
+        return;
+      }
+
+      emptyState.style.display = "block";
+      emptyState.innerHTML = `
+        <strong>Résultats suggérés</strong>
+        <p style="margin: 8px 0 0;">
+          Les réponses ci-dessous correspondent aux sujets les plus proches trouvés dans la base actuelle.
+        </p>
+      `;
+      resultsCount.textContent = `${items.length} réponse${items.length > 1 ? "s" : ""}`;
+
+      items.forEach((item, index) => {
+        const wrapper = document.createElement("div");
+        wrapper.className = "faq-card" + (index === 0 ? " open" : "");
+
+        wrapper.innerHTML = `
+          <button type="button">
+            <div class="faq-card__question">${item.question}</div>
+            <div class="faq-card__icon">${index === 0 ? "−" : "+"}</div>
+          </button>
+          <div class="faq-card__answer" style="${index === 0 ? "display:block;" : ""}">
+            <div class="msg__meta" style="margin: 0 0 12px;">
+              <span class="tag">${categoryLabel(item.category)}</span>
+              <span class="tag ${statusClass(item.status)}">${item.status}</span>
+            </div>
+            <div>${item.answer}</div>
+            <div class="answer-note">${item.note}</div>
+          </div>
+        `;
+
+        const btn = wrapper.querySelector("button");
+        const answer = wrapper.querySelector(".faq-card__answer");
+        const icon = wrapper.querySelector(".faq-card__icon");
+
+        btn.addEventListener("click", () => {
+          const isOpen = wrapper.classList.contains("open");
+          wrapper.classList.toggle("open");
+          answer.style.display = isOpen ? "none" : "block";
+          icon.textContent = isOpen ? "+" : "−";
+        });
+
+        faqList.appendChild(wrapper);
+      });
+    }
+
+    function searchFaq(query = searchInput.value.trim().toLowerCase(), injectedQuestion = null) {
+      const filtered = faqData.filter(item => {
+        const matchesFilter = activeFilter === "all" || item.category === activeFilter;
+        const text = `${item.question} ${item.answer} ${item.note} ${item.category}`.toLowerCase();
+        const matchesQuery = !query || text.includes(query);
+        return matchesFilter && matchesQuery;
+      });
+
+      renderFaq(filtered, injectedQuestion);
+    }
+
+    searchInput.addEventListener("input", () => {
+      searchFaq();
+    });
+
+    filterButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        activeFilter = button.dataset.filter;
+        filterButtons.forEach(btn => btn.classList.remove("active"));
+        button.classList.add("active");
+        searchFaq();
+      });
+    });
+
+    quickButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        const question = button.dataset.question;
+        searchInput.value = question;
+        composerInput.value = question;
+        searchFaq(question.toLowerCase(), question);
+      });
+    });
+
+    askBtn.addEventListener("click", () => {
+      const question = composerInput.value.trim();
+      if (!question) return;
+      searchInput.value = question;
+      searchFaq(question.toLowerCase(), question);
+    });
+
+    composerInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        askBtn.click();
+      }
+    });
+
+    renderFaq(faqData);
+    emptyState.style.display = "none";
+  </script>
+</body>
+</html>
